@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "reg-sample",
+  "scripts": {
+  },
+  "devDependencies": {
+    "@types/mkdirp": "^1.0.0",
+    "@types/node": "^13.13.4",
+    "@types/puppeteer": "^2.0.1",
+    "del": "^5.1.0",
+    "mkdirp": "^1.0.4",
+    "puppeteer": "^3.0.2",
+    "reg-cli": "^0.16.0",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3"
+  }
+}
