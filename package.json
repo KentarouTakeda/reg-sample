@@ -2,6 +2,9 @@
   "private": true,
   "name": "reg-sample",
   "scripts": {
+      "reg:expected": "ts-node src/reg-test.ts expected",
+      "reg:actual": "ts-node src/reg-test.ts actual",
+      "reg:test": "reg-cli .reg/actual .reg/expected .reg/diff -R .reg/index.html -J .reg/reg.json"
   },
   "devDependencies": {
     "@types/mkdirp": "^1.0.0",
