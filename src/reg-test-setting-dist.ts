@@ -30,7 +30,7 @@ export const tests: Tests = {
         },
         {
             evalute: async (page)=>{
-                await page.click('a[title="Google アプリ"]');
+                await page.click('a[aria-label="Google アプリ"]');
                 await sleep(1000);
             },
             file: 'top-menu.png',
