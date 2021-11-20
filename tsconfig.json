@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "lib": ["es2021", "dom"],
+    "module": "commonjs",
     "moduleResolution": "node",
-    "target": "es5",
+    "noImplicitReturns": true,
     "strict": true,
-    "noImplicitReturns": true
+    "target": "es2021"
   }
 }
