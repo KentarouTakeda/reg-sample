@@ -1,5 +1,4 @@
 import { Tests } from './reg-test';
-const sleep = (msec: number) => new Promise(resolve => setTimeout(resolve, msec));
 
 export const tests: Tests = {
     base: 'https://www.google.com/',
@@ -31,7 +30,7 @@ export const tests: Tests = {
         {
             evalute: async (page)=>{
                 await page.click('a[aria-label="Google アプリ"]');
-                await sleep(1000);
+                await page.waitForTimeout(3000);
             },
             file: 'top-menu.png',
         },
