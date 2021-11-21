@@ -41,6 +41,11 @@ tests.agents.forEach(async agent => {
                 waitUntil: 'networkidle0',
             });
         }
+
+        if(tests.afterNavigation) {
+            await tests.afterNavigation(tab);
+        }
+
         if(page.evalute) {
             await page.evalute(tab);
         }

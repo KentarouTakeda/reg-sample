@@ -6,6 +6,11 @@ export interface Tests {
      */
     base: string;
 
+    /**
+     * ナビゲーション終了時に実行する関数
+     */
+    afterNavigation?: (tab: puppeteer.Page)=>Promise<void>;
+
     agents: Agent[]
 
     pages: Page[];
