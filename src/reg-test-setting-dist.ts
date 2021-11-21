@@ -1,4 +1,4 @@
-import { Tests } from './reg-test';
+import { Tests } from "./Test";
 
 export const tests: Tests = {
     base: 'https://www.google.com/',

@@ -2,16 +2,7 @@ import puppeteer = require('puppeteer');
 import mkdirp = require('mkdirp');
 import { realpathSync, existsSync } from 'fs';
 import del = require('del');
-
-export interface Tests {
-    base: string;
-    agents: {
-        name: string,
-        viewport: puppeteer.Viewport,
-        userAgent: string,
-    }[]
-    pages: { path?: string, file?: string, evalute?: (tab: puppeteer.Page)=>Promise<void> }[];
-}
+import { Tests } from './Test';
 
 const DIRS: {[key:string]: string} = {
     expected: `${__dirname}/../.reg/expected`,
