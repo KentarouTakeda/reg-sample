@@ -26,39 +26,46 @@ if(tests == null) {
 }
 
 del.sync(`${dir}/*`);
-tests.agents.forEach(async agent => {
-    const dirWithAgent = dir + '/' + agent.name;
-    const browser = await puppeteer.launch();
-    const tab = await browser.newPage();
-    await tab.setViewport(agent.viewport);
-    await tab.setUserAgent(agent.userAgent);
 
-    mkdirp.sync(dirWithAgent);
-    for(const page of tests.pages) {
-        if(page.path != null) {
-            const url = tests.base + page.path;
-            await tab.goto(url, {
-                waitUntil: 'networkidle0',
-            });
+(async () => {
+    for(const agent of tests.agents) {
+        const dirWithAgent = dir + '/' + agent.name;
+        const browser = await puppeteer.launch({
+            args: [
+                '--incognito'
+            ]
+        });
+        const tab = (await browser.pages())[0];
+        await tab.setViewport(agent.viewport);
+        await tab.setUserAgent(agent.userAgent);
+    
+        mkdirp.sync(dirWithAgent);
+        for(const page of tests.pages) {
+            if(page.path != null) {
+                const url = tests.base + page.path;
+                await tab.goto(url, {
+                    waitUntil: 'networkidle0',
+                });
+            }
+    
+            if(tests.afterNavigation) {
+                await tests.afterNavigation(tab);
+            }
+    
+            if(page.evalute) {
+                await page.evalute(tab);
+            }
+            if(page.file) {
+                const path = `${dirWithAgent}/${page.file}`;
+                await tab.screenshot({
+                    path,
+                    fullPage: true,
+                    captureBeyondViewport: false
+                });
+                console.log(`${tab.url()}\n  saved to ${path}`);
+            }
         }
-
-        if(tests.afterNavigation) {
-            await tests.afterNavigation(tab);
-        }
-
-        if(page.evalute) {
-            await page.evalute(tab);
-        }
-        if(page.file) {
-            const path = `${dirWithAgent}/${page.file}`;
-            await tab.screenshot({
-                path,
-                fullPage: true,
-                captureBeyondViewport: false
-            });
-            console.log(`${tab.url()}\n  saved to ${path}`);
-        }
+    
+        await browser.close();
     }
-
-    browser.close();
-});
+})();
