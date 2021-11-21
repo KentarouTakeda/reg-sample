@@ -1,1 +1,0 @@
-reg-test-setting-dist.ts
