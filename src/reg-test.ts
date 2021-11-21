@@ -38,7 +38,7 @@ tests.agents.forEach(async agent => {
         if(page.path != null) {
             const url = tests.base + page.path;
             await tab.goto(url, {
-                waitUntil: 'load'
+                waitUntil: 'networkidle0',
             });
         }
         if(page.evalute) {
@@ -46,7 +46,11 @@ tests.agents.forEach(async agent => {
         }
         if(page.file) {
             const path = `${dirWithAgent}/${page.file}`;
-            await tab.screenshot({path, fullPage: true});
+            await tab.screenshot({
+                path,
+                fullPage: true,
+                captureBeyondViewport: false
+            });
             console.log(`${tab.url()}\n  saved to ${path}`);
         }
     }
