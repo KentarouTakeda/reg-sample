@@ -5,6 +5,7 @@
     "moduleResolution": "node",
     "noEmit": true,
     "noImplicitReturns": true,
+    "esModuleInterop": true,
     "strict": true,
     "target": "es2021"
   }

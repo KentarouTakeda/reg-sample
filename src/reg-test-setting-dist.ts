@@ -1,7 +1,7 @@
 import { Tests } from "./Test";
 
 export const tests: Tests = {
-    base: 'https://www.google.com/',
+    base: 'https://example.com',
     agents: [
         {
             name: 'iPhoneSE',
@@ -15,7 +15,7 @@ export const tests: Tests = {
         },
         {
             name: 'PC',
-            userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36',
+            userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36',
             viewport: {
                 width: 1024,
                 height: 768,
@@ -25,14 +25,14 @@ export const tests: Tests = {
     pages: [
         {
             path: '/',
-            file: 'top.png',
+            file: 'top.webp',
         },
         {
             evalute: async (page)=>{
-                await page.click('a[aria-label="Google アプリ"]');
-                await page.waitForTimeout(3000);
+                await page.click('a');
+                await new Promise(resolve=>setTimeout(resolve, 3000));
             },
-            file: 'top-menu.png',
+            file: 'learn-more.webp',
         },
     ],
 };

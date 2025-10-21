@@ -45,7 +45,7 @@ interface Page {
     /**
      * スクリーンショットのファイル名
      */
-    file?: string;
+    file: `${string}.webp`;
     /**
      * スクリーンショットを撮影する前に実行する関数
      */

@@ -1,7 +1,7 @@
 import puppeteer = require('puppeteer');
 import mkdirp = require('mkdirp');
 import { realpathSync, existsSync } from 'fs';
-import del = require('del');
+import { deleteSync }  from 'del';
 import { Tests } from './Test';
 
 const DIRS: {[key:string]: string} = {
@@ -25,7 +25,7 @@ if(tests == null) {
     throw new Error('設定ファイルの書式に誤りがあります。');
 }
 
-del.sync(`${dir}/*`);
+deleteSync(`${dir}/*`);
 
 (async () => {
     for(const agent of tests.agents) {
@@ -56,7 +56,7 @@ del.sync(`${dir}/*`);
                 await page.evalute(tab);
             }
             if(page.file) {
-                const path = `${dirWithAgent}/${page.file}`;
+                const path = `${dirWithAgent}/${page.file}` as typeof page.file;
                 await tab.screenshot({
                     path,
                     fullPage: true,
